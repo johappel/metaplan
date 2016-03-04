@@ -1,9 +1,13 @@
 # metaplan
 
 Digitale Umsetzung der Metaplan-Methode. 
+<<<<<<< HEAD
 
 ##http://johappel.github.io/metaplan/
 
+=======
+        
+>>>>>>> origin/gh-pages
 ##Nutzung:
   Klicke auf das Edit-Icon. Schreibe beliebige Thesen/Fragen/Probleme in das sich öffnedende Formular. 
   Schiebe die erzeugten Kärtchen zu Clustern mit dazu in Bezug stehenden Inhalten zusammen. 
@@ -12,7 +16,11 @@ Digitale Umsetzung der Metaplan-Methode.
   oder die Tastenkombination [Strg]+[s] verwendest. Tastatur-Kürzel: 
   [Strg]+[Return] Karte anlegen,
   [ESC] Eingabeformular ausblenden ,
+<<<<<<< HEAD
   [Strg]+[s] speichern.
+=======
+  [Strg]+[s] speichern. 
+>>>>>>> origin/gh-pages
 
 ##Hinweis:
   Beim Speichern werden die Inhalte (Kärtchen) local auf deinem Gerät gespeichert (nicht im Web!).
@@ -21,6 +29,7 @@ Digitale Umsetzung der Metaplan-Methode.
   Du kannst die gespeicherte Seite genau wie ein Dokument aber jederzeit wieder ins Web hochladen und
   mit seinen Inhalten auch anderen zur Ansicht oder als Kopiervorlage zur Verfügung stellen.
   
+<<<<<<< HEAD
 ##Fork
 https://github.com/johappel/metaplan/tree/gh-pages
 
@@ -33,3 +42,11 @@ Datum: 01.3.2016
 Lizenz: GNU (http://www.gnu.de//documents/gpl.de.html)
 
 
+=======
+##Todo: 
+Die eingegebene Inhalte auch im Web unter einer eindeutigen ID speichern
+      
+Autor: Joachim Happel (joachim.happel@gmail.com)
+Datum: 01.3.2016
+Lizenz: GNU (http://www.gnu.de//documents/gpl.de.html)
+>>>>>>> origin/gh-pages
