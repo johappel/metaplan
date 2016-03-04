@@ -10,7 +10,7 @@ Digitale Umsetzung der Metaplan-Methode.
   oder die Tastenkombination [Strg]+[s] verwendest. Tastatur-Kürzel: 
   [Strg]+[Return] Karte anlegen,
   [ESC] Eingabeformular ausblenden ,
-  [Strg]+[s] speichern.
+  [Strg]+[s] speichern. 
 
 ##Hinweis:
   Beim Speichern werden die Inhalte (Kärtchen) local auf deinem Gerät gespeichert (nicht im Web!).
