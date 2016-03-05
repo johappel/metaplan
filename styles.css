@@ -1,0 +1,194 @@
+/*Farbverlauf für den Seiten-Hintergrund */
+body {
+    background-image: radial-gradient(circle farthest-corner at center, #ddd 0%, #BABFC4 100%);
+    max-width:4000px;
+}
+
+/*Link zur Anzeige der Seite ohne Thimbleumgebung*/
+a.help_link {
+    color:#444;
+    font-family:Arial;
+    float:right;
+    text-decoration:none;
+    font-size:80%;
+    display: block;
+    margin: 0 10px;
+    background-image:  linear-gradient( 270deg, #c0c0c0, #CDD1D6  );
+    border: px solid #ddd;
+    border-radius: 5px;
+    padding: 1px 8px;
+    opacity: .5
+}
+a.help_link:hover {
+    background-image: radial-gradient(circle , white , #CDD1D6 )
+}
+/*Die Metaplankärtchen*/
+#thesen p {
+    width:300px;
+    padding:0.5em;
+    background-color:lightgoldenrodyellow;
+    display: block;
+    border-radius:5px;
+    box-shadow: 2px 5px 5px silver;
+    font-family:Arial;
+    position:absolute;
+    top: 0px;
+    border: 1px solid orange;
+    cursor: default;
+}
+
+/*Werkzeugleiste für der Kärtchen, default: ausgeblendet*/
+.toolbar{
+    width:315px;
+    background-color:transparent;
+    height:20px;
+    border-radius:3px;
+    cursor:pointer;
+    display:none;
+    font-weight:bold;
+}
+/*Schaltflächen der Werkzeugleiste*/
+.toolbar div:hover{
+    border-bottom:0;
+    border-top-width:2px;
+    opacity:.6;
+}
+.toolbar .del, .toolbar .clr, .toolbar .edit{
+    background-color:darkred;
+    color:white;
+    border-radius:5px;
+    padding:0 5px;
+    float:right;
+    margin-left:4px;
+    min-width:10px;
+    box-shadow: 5px 5px 18px silver;
+    border: 1px solid #000;
+}
+.toolbar .del{
+    background-color:darkred;
+}
+.toolbar .edit{
+    margin-left:14px;
+    background-color:#fff;
+    width:16px;
+    height:21px;
+    overflow:hidden;
+    border-color: #999;
+}
+.toolbar .edit.active{
+    background-color:yellow;
+    border:1px solid red;
+}
+.toolbar .edit img{
+    width:20px;
+}
+/*Kärtchen Farben + Farbwähler*/
+
+#thesen p.bold, .toolbar .clr.bold{
+    background-color:#fff;
+    border:3px solid red;
+    font-weight:bold;
+}
+.toolbar .clr.bold{
+    color:#444;
+    border:1px solid red;
+}
+#thesen p.yellow, .toolbar .clr.yellow{
+    background-color:lightgoldenrodyellow;
+    border-color:darkred;
+}
+#thesen p.red, .toolbar .clr.red{
+    background-color:#FFCCCC;
+    border-color:darkred;
+}
+#thesen p.green, .toolbar .clr.green{
+    background-color:#CCFFCC;
+    border-color:darkgreen;
+}
+#thesen p.blue, .toolbar .clr.blue{
+    background-color:#99CCFF;
+    border-color:darkblue;
+}
+
+/*Formular Rahmen*/
+.formula{
+    background-color:lightgoldenrodyellow;
+    border-radius:5px;
+    padding:5px 20px 5px 8px;
+    box-shadow: 2px 5px 5px gray;
+    opacity: .6;
+    top:0 px;
+    left:60px;
+    width:300px;
+    position:absolute;
+    z-index:2147483646;
+    margin-top:-220px;
+    background-image: linear-gradient( 245deg, #ddd, #999 );
+}
+/*Eingabefelder und Schaltflächen des Eingabe - Formulars*/
+textarea, input {
+    border-radius:5px;
+    font-family:Arial;
+    border: 1px solid navajowhite;
+    padding:1px 5px;
+    font-size:90%;
+}
+textarea {
+    width:100%
+}
+button:hover,input:hover {
+    background-color:darkred;
+    color:#fff;
+}
+button:active,input:active {
+    background-color:red; color:white
+}
+
+
+/*Knopf zum einblenden des Formulars*/
+#toggleFormBtn {
+    border:0px;
+    position:absolute;
+    top:10px;
+    width:32px;
+    z-index:2147483640;
+    border-radius:5px;
+    border: 3px solid transparent;
+    box-shadow: 2px 5px 15px gray;
+}
+#toggleFormBtn:hover{
+    background-color:silver;
+    border: 3px solid silver;
+    border-radius:5px;
+    box-shadow: 2px 2px 2px gray;
+}
+#toggleFormBtn:active{
+    background-color:darkred;
+    border: 3px solid orange;
+    border-radius:5px;
+    box-shadow: -5px -5px 15px  white;
+}
+/*Hilfe*/
+#help {
+    position:fixed;
+    width:100%;
+}
+#help .help{
+    font-family:Courier;
+    border:0px;
+    width:300px;
+    top:3px;
+    display:none;
+    border-radius: 10px;
+    padding:30px;
+    box-shadow: 5px 5px 50px silver;
+    margin-left : auto;
+    margin-top: 5%;
+    background-color:#9AFE2E;
+    cursor:pointer;
+    background-image: linear-gradient( 45deg, #ddd, #999 );
+    opacity:.6;
+}
+#help .active{
+    display:block;
+}
