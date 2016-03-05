@@ -1,9 +1,9 @@
 #Metaplan
 
 * App: Metaplan
-* Description:  Digitale Umsetzung der Metaplan-Methode.
+* Description: Digitale Umsetzung der Metaplan-Methode.
 * Author: Joachim Happel (joachim.happel@gmail.com)
-* Version: 0.1.1
+* Version: 0.2.1
 * AppSrc: https://github.com/johappel/metaplan
 * AppUrl: http://johappel.github.io/metaplan
 * Lizenz: GNU (http://www.gnu.de//documents/gpl.de.html)
@@ -31,7 +31,7 @@ Du kannst die gespeicherte Seite genau wie ein Dokument aber jederzeit wieder in
 mit seinen Inhalten auch anderen zur Ansicht oder als Kopiervorlage zur Verfügung stellen.
 
 ## Changelog
-0.1.1
+0.2
 * src add: html includer
 * separated Help Container: hints.html
 
