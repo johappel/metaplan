@@ -33,12 +33,12 @@ Du kannst die "Karten" auf deinem Gerät speichern, indem du in deinem Browsemen
 
 
 ## Changelog
-0.3
+== 0.3
 * add child container
-0.2
+== 0.2
 * src add: html includer
 * separated Help Container: hints.html
-0.1 initial release
+== 0.1 initial release
 
 
 ###Todo:
