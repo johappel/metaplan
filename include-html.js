@@ -10,9 +10,7 @@
  */
 (function () {
 
-    myHTMLInclude();
-
-    function myHTMLInclude() {
+    function include() {
         var z, i, a, file, xhttp;
         z = document.getElementsByTagName("*");
         for (i = 0; i < z.length; i++) {
@@ -25,7 +23,7 @@
                         a.removeAttribute("rw-include-html");
                         a.innerHTML = xhttp.responseText;
                         z[i].parentNode.replaceChild(a, z[i]);
-                        myHTMLInclude();
+                        include();
                     }
                 }
                 xhttp.open("GET", file, true);
@@ -33,6 +31,7 @@
                 return;
             }
         }
-    }
+    };
+    include();
 
 })();

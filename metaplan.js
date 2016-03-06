@@ -9,6 +9,7 @@ window.__t = 0;		//aktuelle top position von neuen Kärtchen
 window.__l = 0;		//aktuelle left position von neuen Kärtchen
 window.__lvl = 0; 	//hilfe level
 window.__d = 0; 	//speichert ob der Nutzer schon kärtchen verschoben hat
+window.__pointer = { x:0, y:0 } ;
 
 //Inititialisierung
 function init(){
@@ -41,7 +42,7 @@ function init(){
 
 //Karte löschen
 function deleteEl(el){
-    var post = $(el).parents('p.post');
+    var post = $(el).parents('div.post');
     post.remove();
 
 }
@@ -49,18 +50,18 @@ function deleteEl(el){
 function editEl(el){
 
     var btn = $(el);
-    var post = btn.parents('p.post');
+    var post = btn.parents('div.post');
 
     if(btn.hasClass('active')){
 
         $('.toolbar').remove();
-        $('p').draggable( "enable" );
+        $('div').draggable( "enable" );
 
 
     }else{
         btn.addClass('active')
         post.draggable( "disable" );
-        post.find('span.content')[0].focus();
+        post.find('div.content')[0].focus();
         post.css('cursor','auto');
 
     }
@@ -70,9 +71,8 @@ function editEl(el){
 
 //Aussehen eine Karte Wechseln
 function colorEl(el){
-    //ausgehend vom [Farb] Button den p-Tag eines Beitrags (post) ermitteln
-    var post = $(el).parents('p.post');
-
+    //ausgehend vom [Farb] Button den div-Tag eines Beitrags (post) ermitteln
+    var post = $(el).parents('div.post');
     //Layouteinstellungen zurücksetzen
     post.removeClass('bold');
     post.removeClass('red');
@@ -101,12 +101,19 @@ function colorEl(el){
 function showToolbar(el, clickedElem){
     var tb;
 
+    if(clickedElem.className == 'toggle'){
+        return false;
+    }
+
+
     //die Toolbar existiert und wurde benutzt => nix unternehmen
     if(clickedElem && $(clickedElem).parents('.toolbar').length > 0){
         return;
     }
 
     //Die Toolbar existier, es wurde auf das Kärtchen geklickt => ausblenden
+    //tb = $(el).find('.toolbar');
+
     tb = $(el).find('.toolbar');
     if( tb.length>0 ) {
         if(tb.find('.edit').hasClass('active')){
@@ -116,10 +123,10 @@ function showToolbar(el, clickedElem){
     }else{
 
         //Werkzeugleiste innerhalb des aktiven Elements(Karte) erstellen
-        $(el).find('span.tbar').append( '<div class="toolbar">'
+        $(el).find('span.tbar').first().append( '<div class="toolbar">'
             +'<div class="del" title="Karte löschen">X</div>'
             +'<div class="edit" title="Inhalt bearbeiten">'
-            +'<img src="http://upload.wikimedia.org/wikipedia/commons/4/4c/Edit_font_awesome.svg">'
+            +'<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAUCAYAAACJfM0wAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAJgAAACYB+E5zqwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFzSURBVDiN1dS/S5VRHMfx171pRWARQUuTOgQi4VSD0A9CnDSVIBxDUBsscHDrX7B/oEEw+gOMchAcHBzEyYbCQRRFywQdBFG0p+F8pYvdm8+9U33h4fA83/N5P59zvt9z+N+iUDI+xT005ND9xDImsIsbGMA0Pp8C6/ABnfiCg5ymdtAfjHncxj76MAODyOJDtdGKJrwORoZDdMBbfKsB2h6ut9AWBo8DPgqTWKsS2hXQEWxjDw/Ri3EUawE/x3cMY9PvLThAc+nEasCvsCEte6cEeoyhs5PzgAt4g694Ge5KnfaUE50Hrsc7nEhLPy1QJvXw/XKi4jlOi1KPN6MF67gQuS08wFwl8d8cXwpn3dKJvCZ1wTIapRP3EddrBWdScaawiJuRfxG5W2eFRRzhYgVwhpV4xuL9UbiGyzEelhMPh+BJBXiluIqF+OkfUZCq/gmPsYQfOaD1uCOttBuz5cCkLXmGu7iS0/Eq3qv+OvhH4xdNNWBdMgKaMgAAAABJRU5ErkJggg==">'
             +'</div>'
             +'<div class="clr bold" title="Fett">F</div>'
             +'<div class="clr yellow">&nbsp;</div>'
@@ -138,7 +145,6 @@ function showToolbar(el, clickedElem){
 }
 
 
-
 //eine neue Karte nach absenden der Daten erstellen
 function createEl(el){
     //Den Inhalt des Eingabefelds in der Variabel c speichern
@@ -146,13 +152,6 @@ function createEl(el){
 
     //Wenn der Inhalt nicht leer ist
     if(c){
-
-        //z-index erhöhen damit das neue kärtchen ganz oben liegt
-        window.__z ++; window.__l +=2;
-
-        //top erhöhen, damit das Kärtchen etwas weiter unten liegt
-        if(__t === 0) __t = __Const_Top;
-        window.__t +=30;
 
         //eine unverwechselbar ID generieren
         id = 'post-'+Math.round(Math.random() * 10000000);
@@ -162,14 +161,17 @@ function createEl(el){
 
         //HTML-Gerüst für die neue Karte
 
-        c = '<p id="'+id+'" class="post">'
-            + '<span class="tbar"/>'	/* Platzhalter für Werkzeugleiste */
-            + '<span class="content" contenteditable="true">'
-            +c+'</span>'		/* Der eingegebene Inhalt */
-            + '</p>';
+        var karte=   '<div id="'+id+'" class="post">'
+            +   '<span class="tbar"/>'	        /* Platzhalter für Werkzeugleiste */
+            +   '<div class="content" contenteditable="true">'
+            +       c
+            +   '</div>'		                /* Der eingegebene Inhalt */
+            +   '<ul class="childs"/>'        /* Angehängte Kärtchen */
+            +   '<div class="toggle"/>'        /* Angehängte Kärtchen */
+            + '</div>';
 
-        //Am Ende des Platzhalters <div id="thesen"> anfügen
-        $('#thesen').append( c );
+        //Am Ende des Platzhalters <div id="karten"> anfügen
+        $('#karten').append( karte );
 
         //Eingabefeld leeren und den Cursor-Focus wieder in das Feld setzen
         //Damit man ohne Klick sofort das nächste Kärtchen schreiben kann
@@ -177,57 +179,222 @@ function createEl(el){
         $('#post')[0].focus();
 
         //das neu erzeugte Element positionieren
-        var el = $('#'+id);
-        el.css({'z-index':__z,'top': __t +'px','left': __l +'px'})
+        addDragAndDropFunctions('#'+id );
 
-        //Drag&Drop funktionalität auch zu dem neu erzeugten Elemenet hinzufürgen
 
-        el.draggable(); /* ab jetzt kann man ziehen */
 
-        //Wenn der Nutzer anfängt, ein Kärtschen zu ziehen....
-        el.on('dragstart', function(e){
-            //Beim Ziehen eines Kärtchen sollte dieses immer ganz oben sein
-            //dazu den z-index des aktuellen Kärtchens erhöhen
-            window.__t = __Const_Top;
-            window.__z ++;
-            el.css('z-index', window.__z);
-            //alle Hilfen ausblenden
-            $('.toolbar').remove();
-        });
-
-        //Wenn der Nutzer das Kärtchen loslässt
-        el.on('dragstop', function(e){
-            //registrieren wenn der Nutzer ein Kärtchen verschoben hat
-            __d++;
-            //Hilfestellungen geben
-            showTip();
-        });
-
-        //Beim Klick auf das Kärtchen soll die Werkzeugleiste angezeigt werden
-        //dazu dem onclick ereignis die Funktion "showToolbar" zuordnen
-        el.on('click', function(e){
-            showToolbar(this, e.target);
-            //el.draggable( "enable" );
-        });
-        //Zum Editieren (Doppelklick) muss die Drag 'n Drop Funktion vorrübergehend abgeschaltet werden
-        el.on('dblclick', function(){
-            // el.draggable( "disable" );
-        });
-        //Hilfe-Tips zur Bedienung anzeigen
-        showTip();
     }
 }
+
+function getMyParent(el,selector){
+
+    var parent = $(el).parents('.post');
+    if(parent.length==0){
+        parent = el
+    }else{
+        parent = parent[0];
+    }
+    if( selector ){
+        parent = $(parent).find(selector)[0];
+    }
+
+    return parent;
+}
+
+function setToggle(el){
+
+
+    var parent = $(el).parents('.post');
+    if(parent.length>0){
+        el = parent[0];
+    }
+
+
+    $(el).find('.post').removeClass('withchilds');
+    $(el).removeClass('withchilds');
+    $(el).find('.childs').css('min-height','auto');
+
+    if( $(el).find('ul .post').length > 0 ){
+        $(el).addClass('withchilds');
+        $(el).find('ul .post').css({
+            'top':'0',
+            'left':'0'
+
+        });
+    }
+
+    $(el).find('.toggle').off();
+    $(el).find('.toggle:last').on('click', function(){
+
+        if($(this).parents('.post').hasClass('closed')){
+
+            $(this).parents('.post').removeClass('closed');
+
+        }else{
+            $(this).parents('.post').addClass('closed');
+        };
+    })
+}
+
+function addDragAndDropFunctions(element, exist){
+
+    exist = exist || false;
+    var elem = $(element);
+
+    elem.__do_position = false;
+
+    setToggle(elem);
+
+    if(exist){
+
+        elem.removeClass('ui-draggable');
+        elem.removeClass('ui-droppable');
+
+        if(window.__z < Number(elem.css('z-index')) ){
+            window.__z =  Number(elem.css('z-index'));
+        }
+
+
+    }else{
+        //z-index erhöhen damit das neue kärtchen ganz oben liegt
+        window.__z ++;
+        window.__l +=2;
+
+        //top erhöhen, damit das Kärtchen etwas weiter unten liegt
+        if(__t === 0) __t = __Const_Top;
+        window.__t +=30;
+
+        elem.css({'z-index':__z,'top': __t +'px','left': __l +'px'})
+    }
+
+
+    //Drag&Drop funktionalität auch zu dem neu erzeugten Elemenet hinzufürgen
+
+    elem.draggable();
+    elem.droppable({
+        hoverClass: "ui-state-active",
+        tolerance:'pointer',
+        drop: function ( event, ui ){
+                var parentpost =getMyParent(this);
+
+                if($(parentpost).hasClass('closed')){
+                    return;
+                }
+
+                var parent =getMyParent(this,'ul');
+                var child  =ui.draggable[0];
+                $(child).appendTo(parent);
+                $(child).droppable("disable");
+                setToggle(child);
+            },
+        over: function ( event, ui ){
+
+            var parent =getMyParent(this,'ul');
+            console.log(parent);
+            var child  = ui.draggable[0];
+            var height= $(child).height()+2+$(parent).height();
+
+            $(parent).css({
+                'min-height':height+'px',
+                'border-radius':'5px',
+                'background-color': '#dfdfdf'
+            });
+
+        },
+        out: function ( event, ui ){
+
+            var parent =getMyParent(this,'ul');
+            $(parent).css({
+                'min-height':'auto',
+                'border': 0,
+                'background-color': 'transparent'
+
+            });
+
+        }
+    });
+
+
+
+    elem.on('dragstart', function(e, ui){
+
+
+        if(elem.css('position') != 'absolute'){
+
+            //element befreien
+
+            if(elem.parents('.post').length>0){
+                var parent = elem.parents('.post')[0];
+
+                elem.appendTo('#karten');
+                elem.droppable("enable");
+                $(parent).find('ul').css('min-height','auto')
+
+                setToggle(this);
+                setToggle(parent);
+
+                var left = window.__pointer.x;
+                var top  = window.__pointer.y
+
+
+                if(top == 0 || left == 0){
+                    top  = $(parent).position().top +40;
+                    left = $(parent).position().left +10;
+               }
+               elem.__do_position = true;
+
+
+            }
+        }
+        window.__t = __Const_Top;
+        window.__z ++;
+        elem.css({'z-index':Number(window.__z)});
+
+        //alle Hilfen ausblenden
+        $('.toolbar').remove();
+    });
+
+    elem.on('drag', function(e, ui){
+        if(elem.__do_position){
+            ui.position={'top': window.__pointer.y-30, 'left': window.__pointer.x-150};
+            ui.helper[0].style.zIndex=window.__z+1;
+        }
+    });
+
+    //Wenn der Nutzer das Kärtchen loslässt
+    elem.on('dragstop', function(e){
+
+        elem.__do_position = false;
+
+        //registrieren wenn der Nutzer ein Kärtchen verschoben hat
+        __d++;
+
+
+    });
+
+
+    //Beim Klick auf das Kärtchen soll die Werkzeugleiste angezeigt werden
+    //dazu dem onclick ereignis die Funktion "showToolbar" zuordnen
+    elem.on('click', function(e){
+        showToolbar(this, e.target);
+        //elem.draggable( "enable" );
+    });
+    //Zum Editieren (Doppelklick) muss die Drag 'n Drop Funktion vorrübergehend abgeschaltet werden
+    elem.on('dblclick', function(){
+        // elem.draggable( "disable" );
+    });
+
+
+}
+
 
 //bereits gespeicherte Metaplankarten müssen beim Laden der Seite händelbar gemacht werden
 //siehe Erklärungen beim neu anlegen eines Kärtchens
 function makeDraggable(){
-    $('#thesen p').draggable();
-    $('#thesen p').on('click', function(){
-        showToolbar(this);
+    $.each( $('#karten div.post') , function( key, value ) {
+       addDragAndDropFunctions('#'+value.id, true);
     });
-    $('#thesen p').on('dblclick', function(){
-        $(this).draggable( "disable" );
-    });
+    window.__z ++;
 }
 
 
@@ -255,50 +422,4 @@ function toggleForm(){
 
 
 
-}
-
-//Nutzungslevel abhängige Hilfe, die angezeigt wird,
-//wenn der User etwas erfolgreich ein neues Level erreicht hat
-//und inaktiv ist, wenn ein Nutzer das max Level erreicht hat
-
-function showTip(){
-    if(localStorage.getItem('metaplan-tips')){
-        return;
-    }
-    var max = $('.help').length -1;
-    if (__lvl > max){
-        return;
-    }else if(__z == 1 ){  //erste Karte erzeugt
-        _displayTip(1)
-        __lvl ++ ;
-    }else if(__z == 10 ){ //10 mal Karten erzeugt/verschoben
-        __lvl ++ ;
-        _displayTip(3)
-    }else if(__d == 1 ) { //Karte zum ersten mal verschoben
-        __lvl ++ ;
-        _displayTip(4)
-    }else if( __lvl == 3){ //weiterer Tip (wie man speichert)
-        __lvl ++;
-        _displayTip(2)
-    }else if(__z == 20 && __lvl >3 ){ //noch ein Tip
-        __lvl ++ ;
-        _displayTip(6)
-    }else if(__lvl == max){ //max Level erreichet
-        __lvl++;
-        _displayTip(5);
-        //im Browser speichern, dass alle Tipps angezeigt wurden
-        localStorage.setItem('metaplan-tips', 1);
-    }else if(__lvl > max){
-
-    }
-}
-
-//Helfer Routine von showTip():
-//Aktive Tips ausblenden, (Klasse "active" löschen)
-//danach den übergebenen Hilfetext mit der Nr (n) aktivieren
-// (Klasse "active" hinzufügen)
-
-function _displayTip(n){
-    $('.help').removeClass('active');
-    $('#help-'+n).addClass('active');
 }
