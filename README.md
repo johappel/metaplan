@@ -16,33 +16,21 @@ DemoUrl (https://rawgit.com/johappel/metaplan/master/index.html)  im Browser sta
 
 ## Kurzanleitung
     
-* Klicke auf das Symbol oben links und schreibe eine beliebige These/Frage/Ideen in das sich öffnende Formular. Dann erzeugst du mit dem Inhaltz eine neue Metaplankarte
-* Schiebe die erzeugten Kärtchen zu inhaltlichen Clustern zusammen und setze darüber neue Kärtchen mit Überschriften über die Cluster.
-* Ziehe den Cluster auf die übergeordneten Kärtchen. Blende zur besseren Übersichtlichkeit untergeordnete Kärtchen aus.
-
+* Klicke auf das Symbol oben links und schreibe eine beliebige These/Frage/Idee in das sich öffnende Formular. Klicke auf "Metaplankarte erzeugen".
+* Orde die Kärtchen beliebig auf der Wand oder schiebe sie zu inhaltlichen Clustern zusammen. Setze darüber neue Kärtchen als Überschriften.
+* Ziehe zughörige Kärtchen auf die übergeordneten Kärtchen. Blende zur besseren Übersichtlichkeit untergeordnete Kärtchen aus.
 
 ### Karten bearbeiten
-Wenn du auf eine Karte klickst, erscheint
-eine kleine Werkzeugleiste.
-Wenn du auf das [F] klickst, wird der Inhalt Fett dargestellt
-und rot umrandet. Genau richtig für Überschriften.
+Wenn du auf eine Karte klickst, erscheint eine kleine Werkzeugleiste. Wenn du auf das [F] klickst, wird der Inhalt Fett dargestellt und rot umrandet. Genau richtig für Überschriften.
 
-### Speichern
-Du kannst die "Karten"
-auf deinem Gerät speichern,
-indem du in deinem Browsemenü auf "Speichern unter" klickst.
-So gespeicherte Datei lassen sich offline weiterbearbeiten
-und mit allen Inhalten wieder ins Web hochladen.
+### Speichern 
+Du kannst die "Karten" auf deinem Gerät speichern, indem du in deinem Browsemenü auf "Speichern unter" klickst. So gespeicherte Datei lassen sich offline weiterbearbeiten und mit allen Inhalten wieder ins Web hochladen.
     
-### Tasten-Kürzel für PC-Nutzer:
+### Tasten-Kürzel für PC-Nutzer 
 [ESC] Formular ein- /ausblenden 
 [Strg]+[Return] Karte anlegen,
 [Strg]+[s] Alles speichern.
 
-##Hinweis:
-Beim Speichern werden die Inhalte (Kärtchen) local auf deinem Gerät gespeichert (nicht im Web!).
-Du kannst die gespeicherte Seite genau wie ein Dokument aber jederzeit wieder ins Web hochladen und
-mit seinen Inhalten auch anderen zur Ansicht oder als Kopiervorlage zur Verfügung stellen.
 
 ## Changelog
 0.3
@@ -50,7 +38,6 @@ mit seinen Inhalten auch anderen zur Ansicht oder als Kopiervorlage zur Verfügu
 0.2
 * src add: html includer
 * separated Help Container: hints.html
-
 0.1 initial release
 
 
