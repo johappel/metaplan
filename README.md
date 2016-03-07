@@ -6,12 +6,12 @@
 * Version: 0.3
 * AppSrc: https://github.com/johappel/metaplan
 * AppUrl: http://johappel.github.io/metaplan (zur Zeit noch Version 0.2)
-* DemoUrl: https://rawgit.com/johappel/metaplan/master/index.html
+* DemoUrl: https://rawgit.com/johappel/metaplan/onepage/index.html
 * Lizenz: GNU (http://www.gnu.de//documents/gpl.de.html)
 * Contributers: johappel
 
 ##Installation
-DemoUrl (https://rawgit.com/johappel/metaplan/master/index.html)  im Browser starten.
+DemoUrl (https://rawgit.com/johappel/metaplan/onepage/index.html)  im Browser starten.
 
 
 ## Kurzanleitung
