@@ -377,6 +377,8 @@ function addDragAndDropFunctions(element, exist){
     //dazu dem onclick ereignis die Funktion "showToolbar" zuordnen
     elem.on('click', function(e){
         showToolbar(this, e.target);
+        window.__z ++;
+        elem.css({'z-index':Number(window.__z)});
         //elem.draggable( "enable" );
     });
     //Zum Editieren (Doppelklick) muss die Drag 'n Drop Funktion vorrübergehend abgeschaltet werden
